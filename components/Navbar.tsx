@@ -12,7 +12,7 @@ import {
 
 const Navbar = () => {
   return (
-    <div className="w-full md:h-[90px] h-[70px] border-b-[1px] border-gray-200">
+    <div className="w-full md:h-[90px] h-[70px]">
       <div className="flex justify-between items-center h-full px-4 md:px-12">
         <Link href="/" className="flex items-center justify-center gap-3">
           <Mountain className="text-ocean-green-500" />
