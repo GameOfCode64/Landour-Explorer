@@ -17,7 +17,7 @@ const HeroPage = () => {
         objectFit="cover"
         alt="bgimg"
       />
-      <div className="md:px-20 px-4 py-8 md:gap-28 gap-8 relative z-[10] grid md:grid-cols-2 grid-cols-1">
+      <div className="md:px-20 px-4 py-8 md:gap-28 gap-8 relative z-[10] grid lg:grid-cols-2 grid-cols-1">
         <div className="flex flex-col">
           <h1 className="font-bold md:text-[56px] text-[38px] text-nowrap w-full">
             Discover the{" "}
@@ -51,14 +51,14 @@ const HeroPage = () => {
             />
           </div>
           <div className="flex flex-col md:gap-5 gap-2">
-            <div className="md:w-[250px] w-[150px] h-[180px] rounded-3xl">
+            <div className="md:w-[250px] w-[170px] h-[180px] rounded-3xl">
               <Image
                 src={bg2}
                 alt="bg2"
                 className="rounded-3xl w-full h-full  object-cover"
               />
             </div>
-            <div className="md:w-[250px] w-[150px] h-[180px] rounded-3xl">
+            <div className="md:w-[250px] w-[170px] h-[180px] rounded-3xl">
               <Image
                 src={bg1}
                 alt="bg2"
