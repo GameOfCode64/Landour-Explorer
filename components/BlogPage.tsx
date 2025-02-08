@@ -36,7 +36,7 @@ const BlogPage = () => {
           <div className="flex gap-5">
             <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
               <Image
-                src={bg1}
+                src={bg3}
                 alt="blog_img"
                 className="w-full h-full rounded-3xl object-center object-cover"
               />
@@ -48,7 +48,34 @@ const BlogPage = () => {
                 our latest blogs.
               </h1>
 
-              <div className="md:mt-12 mt-2 text-sm">
+              <div className="md:mt-6 mt-2 text-sm">
+                <p className="font-bold">
+                  By :-{" "}
+                  <span className="text-ocean-green-500 font-semibold">
+                    {" "}
+                    John Doe
+                  </span>
+                </p>
+                <p className="text-muted-foreground">Jan 24, 2025, Mon</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-5">
+            <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
+              <Image
+                src={bg2}
+                alt="blog_img"
+                className="w-full h-full rounded-3xl object-center object-cover"
+              />
+            </div>
+            <div className="flex flex-col w-[220px]">
+              <p className="font-bold text-ocean-green-500">Traveling</p>
+              <h1 className="md:max-w-[370px] font-bold text-sm md:text-lg text-wrap">
+                Try are our latest blogs & Stories related to traveling. Try are
+                our latest blogs.
+              </h1>
+
+              <div className="md:mt-6 mt-2 text-sm">
                 <p className="font-bold">
                   By :-{" "}
                   <span className="text-ocean-green-500 font-semibold">
@@ -70,39 +97,12 @@ const BlogPage = () => {
             </div>
             <div className="flex flex-col w-[220px]">
               <p className="font-bold text-ocean-green-500">Traveling</p>
-              <h1 className="md:max-w-[370px] font-bold text-sm md:text-lg text-wrap">
+              <h1 className="md:max-w-[470px] font-bold text-sm md:text-lg ">
                 Try are our latest blogs & Stories related to traveling. Try are
                 our latest blogs.
               </h1>
 
-              <div className="md:mt-12 mt-2 text-sm">
-                <p className="font-bold">
-                  By :-{" "}
-                  <span className="text-ocean-green-500 font-semibold">
-                    {" "}
-                    John Doe
-                  </span>
-                </p>
-                <p className="text-muted-foreground">Jan 24, 2025, Mon</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-5">
-            <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
-              <Image
-                src={bg1}
-                alt="blog_img"
-                className="w-full h-full rounded-3xl object-center object-cover"
-              />
-            </div>
-            <div className="flex flex-col w-[220px]">
-              <p className="font-bold text-ocean-green-500">Traveling</p>
-              <h1 className="md:max-w-[370px] font-bold text-sm md:text-lg text-wrap">
-                Try are our latest blogs & Stories related to traveling. Try are
-                our latest blogs.
-              </h1>
-
-              <div className="md:mt-12 mt-2 text-sm">
+              <div className="md:mt-6 mt-2 text-sm">
                 <p className="font-bold">
                   By :-{" "}
                   <span className="text-ocean-green-500 font-semibold">
