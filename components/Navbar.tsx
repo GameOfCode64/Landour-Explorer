@@ -54,16 +54,16 @@ const Navbar = () => {
                 <Link href="/" className="font-semibold text-[17px]">
                   Home
                 </Link>
-                <Link href="/" className="font-semibold text-[17px]">
+                <Link href="/treks" className="font-semibold text-[17px]">
                   Treks
                 </Link>
-                <Link href="/" className="font-semibold text-[17px]">
+                <Link href="/blogs" className="font-semibold text-[17px]">
                   Blogs
                 </Link>
-                <Link href="/" className="font-semibold text-[17px]">
+                <Link href="/about" className="font-semibold text-[17px]">
                   About
                 </Link>
-                <Link href="/" className="font-semibold text-[17px]">
+                <Link href="/contact-us" className="font-semibold text-[17px]">
                   Contact
                 </Link>
               </div>
