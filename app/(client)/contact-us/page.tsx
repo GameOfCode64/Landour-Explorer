@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2Icon } from "lucide-react";
 
-const Page = () => {
+const ContactPage = () => {
   const [isLoading, setisLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -105,4 +105,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ContactPage;
