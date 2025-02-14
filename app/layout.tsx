@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Search from "@/components/Search";
+import SocialMediaCard from "@/components/FollowUsCard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <Navbar />
         <Search />
+        <SocialMediaCard />
         {children}
         <Footer />
       </body>
