@@ -33,7 +33,6 @@ const TrekPage = async ({ params }: BlogParams) => {
               </div>
             </div>
           </div>
-
           <FollowBtn text="follow" />
         </div>
         <div className="flex flex-col">
