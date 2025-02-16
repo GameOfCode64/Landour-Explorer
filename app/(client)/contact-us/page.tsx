@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
+import { motion } from "motion/react";
 import contact from "@/public/traveling.svg";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,83 +25,89 @@ const ContactPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setisLoading(true);
+    setTimeout(() => setisLoading(false), 2000); // Simulating API call
   };
 
   return (
-    <div className="w-full h-auto mt-8">
-      <div className="flex items-center justify-center h-full lg:px-20 md:px-12 px-4">
-        <div className="w-full flex justify-between bg-[#f5f7f7] rounded-3xl shadow-md lg:px-12 md:px-12 px-6 py-16">
-          <div className="lg:flex md:flex hidden flex-col basis-[40%]">
-            <h1 className="text-3xl font-bold">
-              We ❤️ love to hear from you! Fill out the form below to get in
-              touch.
-            </h1>
-            <div className="flex items-center justify-center mt-16">
-              <div className="w-[350px]">
-                <Image
-                  src={contact}
-                  alt="contact-us"
-                  className="w-full h-full"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="lg:basis-[45%] md:basis-[45%] w-full flex flex-col">
-            <form
-              className="flex w-full flex-col gap-4"
-              onSubmit={handleSubmit}
-            >
-              <Input
-                name="fullName"
-                placeholder="Full Name"
-                className="py-6 focus-visible:ring-ocean-green-500 w-full"
-                required
-                onChange={handleChange}
-              />
-              <Input
-                name="email"
-                placeholder="Email Address"
-                className="py-6 focus-visible:ring-ocean-green-500"
-                required
-                type="email"
-                onChange={handleChange}
-              />
-              <Input
-                name="phoneNumber"
-                placeholder="Phone Number"
-                className="py-6 focus-visible:ring-ocean-green-500"
-                onChange={handleChange}
-              />
-              <Input
-                name="trekName"
-                placeholder="Trek Name"
-                className="py-6 focus-visible:ring-ocean-green-500"
-                onChange={handleChange}
-              />
-              <Textarea
-                name="message"
-                placeholder="Message"
-                className="focus-visible:ring-ocean-green-500"
-                required
-                onChange={handleChange}
-              />
-              <Button
-                type="submit"
-                className="text-white  py-6 bg-ocean-green-500 hover:bg-ocean-green-600"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2Icon className="animate-spin mr-2" /> Sending...
-                  </>
-                ) : (
-                  <> Send Message</>
-                )}
-              </Button>
-            </form>
+    <div className="w-full min-h-screen flex items-center justify-center px-4 lg:px-20 py-12 bg-gray-50">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="w-full max-w-5xl bg-white shadow-xl rounded-3xl overflow-hidden flex flex-col lg:flex-row"
+      >
+        {/* Left Section */}
+        <div className="hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-ocean-green-500 to-ocean-green-700 text-white p-12 w-1/2">
+          <h1 className="text-3xl font-bold text-center">
+            We ❤️ love to hear from you!
+          </h1>
+          <p className="mt-4 text-lg text-center">
+            Fill out the form below to get in touch, and let's start planning
+            your next adventure.
+          </p>
+          <div className="mt-8">
+            <Image src={contact} alt="contact-us" width={300} height={300} />
           </div>
         </div>
-      </div>
+
+        {/* Right Section - Form */}
+        <div className="w-full lg:w-1/2 p-8 lg:p-12">
+          <h2 className="text-2xl font-semibold text-gray-800 text-center">
+            Contact Us
+          </h2>
+          <form className="mt-6 flex flex-col gap-5" onSubmit={handleSubmit}>
+            <Input
+              name="fullName"
+              placeholder="Full Name"
+              className="py-3 border-gray-300 focus:ring-2 focus:ring-ocean-green-500"
+              required
+              onChange={handleChange}
+            />
+            <Input
+              name="email"
+              placeholder="Email Address"
+              type="email"
+              className="py-3 border-gray-300 focus:ring-2 focus:ring-ocean-green-500"
+              required
+              onChange={handleChange}
+            />
+            <Input
+              name="phoneNumber"
+              placeholder="Phone Number"
+              className="py-3 border-gray-300 focus:ring-2 focus:ring-ocean-green-500"
+              onChange={handleChange}
+            />
+            <Input
+              name="trekName"
+              placeholder="Trek Name"
+              className="py-3 border-gray-300 focus:ring-2 focus:ring-ocean-green-500"
+              onChange={handleChange}
+            />
+            <Textarea
+              name="message"
+              placeholder="Message"
+              rows={4}
+              className="border-gray-300 focus:ring-2 focus:ring-ocean-green-500"
+              required
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              className="mt-4 bg-ocean-green-600 text-white py-3 rounded-md hover:bg-ocean-green-700 transition-all flex items-center justify-center"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2Icon className="animate-spin mr-2" /> Sending...
+                </>
+              ) : (
+                "Send Message"
+              )}
+            </Button>
+          </form>
+        </div>
+      </motion.div>
     </div>
   );
 };
