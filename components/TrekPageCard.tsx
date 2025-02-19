@@ -44,7 +44,11 @@ const TrekPageCard = () => {
                   </Button>
                 </a>
                 <Link
-                  href={trek.slug === null ? "" : `/treks/${trek.slug}`}
+                  href={
+                    trek.slug === null
+                      ? ""
+                      : `/treks/${trek.trekName.split(" ").join("-")}`
+                  }
                   className="w-full"
                 >
                   <Button className="w-full py-6 border-[4px] border-solid border-ocean-green-500 bg-ocean-green-500 hover:bg-ocean-green-600 hover:border-ocean-green-600">
