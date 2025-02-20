@@ -205,6 +205,7 @@ const TrekCard = () => {
             repeat: Infinity,
             repeatType: "reverse",
           }}
+          onClick={() => window.location.replace("/treks")}
         >
           Explore All Locations
         </motion.button>

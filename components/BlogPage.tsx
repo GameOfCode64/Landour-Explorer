@@ -125,6 +125,9 @@ const BlogPage = () => {
             repeat: Infinity,
             repeatType: "reverse",
           }}
+          onClick={() => {
+            window.location.href = "/blogs";
+          }}
         >
           Explore All Blogs
         </motion.button>

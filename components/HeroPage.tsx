@@ -1,13 +1,31 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import map from "@/public/map.png";
 import air from "@/public/bg-air.png";
-import bg1 from "@/public/img_1.jpg";
-import bg2 from "@/public/img_2.jpeg";
 import { motion } from "motion/react";
+import { getHero } from "@/sanity/lib/querys/getHero";
+
+interface HeroInterface {
+  description: string;
+  mainImg: string;
+  sideImg1: string;
+  sideImg2: string;
+}
 
 const HeroPage = () => {
+  const [hero, setHero] = useState<HeroInterface | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getHero();
+        setHero(data);
+      } catch (error) {
+        console.error("Failed to fetch navbar data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="bg-cover bg-center w-full h-screen relative">
       <Image
@@ -24,14 +42,18 @@ const HeroPage = () => {
             <p className="text-ocean-green-500 font-bold">Uttarakhand’s</p>{" "}
             Hidden Wonders
           </h1>
-          <p className="md:pr-28 md:mt-8 mt-4 text-left text-warp text-sm">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam
-            impeditodit excepturi alias sint id numquam nemo itaque quod minus
-            iure nam nullalabore maiores facere sit asperiores placeat,
-            assumenda praesentiumaut? Fuga voluptatum nesciunt nobis, atque ut,
-            provident veniam dolorem nemo.
-          </p>
-          <button className=" w-[150px] cursor-pointer hidden md:flex bg-ocean-green-500 hover:bg-ocean-green-600 py-3 items-center justify-center text-white rounded-3xl mg:mt-8 mt-4">
+          {hero?.description && (
+            <p className="md:pr-28 md:mt-8 mt-4 text-left text-warp text-sm">
+              {hero.description}
+            </p>
+          )}
+
+          <button
+            onClick={() => {
+              window.location.href = "/treks";
+            }}
+            className=" w-[150px] cursor-pointer hidden md:flex bg-ocean-green-500 hover:bg-ocean-green-600 py-3 items-center justify-center text-white rounded-3xl mg:mt-8 mt-4"
+          >
             Explore Now
           </button>
           <Image
@@ -44,26 +66,38 @@ const HeroPage = () => {
         </div>
         <div className="flex items-center justify-normal md:gap-5 gap-2 flex-row">
           <div className="md:w-[250px] w-[200px] h-[380px] rounded-3xl">
-            <Image
-              src={bg2}
-              alt="bg1"
-              className="rounded-3xl w-full h-full  object-cover"
-            />
+            {hero?.mainImg && (
+              <Image
+                src={hero.mainImg}
+                alt="bg1"
+                className="rounded-3xl w-full h-full object-cover"
+                width={500}
+                height={500}
+              />
+            )}
           </div>
           <div className="flex flex-col md:gap-5 gap-2">
             <div className="md:w-[250px] w-[170px] h-[180px] rounded-3xl">
-              <Image
-                src={bg2}
-                alt="bg2"
-                className="rounded-3xl w-full h-full  object-cover"
-              />
+              {hero?.sideImg1 && (
+                <Image
+                  src={hero?.sideImg1}
+                  alt="bg2"
+                  className="rounded-3xl w-full h-full  object-cover"
+                  width={500}
+                  height={500}
+                />
+              )}
             </div>
             <div className="md:w-[250px] w-[170px] h-[180px] rounded-3xl">
-              <Image
-                src={bg1}
-                alt="bg2"
-                className="rounded-3xl w-full h-full object-cover"
-              />
+              {hero?.sideImg2 && (
+                <Image
+                  src={hero?.sideImg2}
+                  alt="bg3"
+                  className="rounded-3xl w-full h-full  object-cover"
+                  width={500}
+                  height={500}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -75,6 +109,9 @@ const HeroPage = () => {
               duration: 2,
               repeat: Infinity,
               repeatType: "reverse",
+            }}
+            onClick={() => {
+              window.location.href = "/treks";
             }}
           >
             Explore Now

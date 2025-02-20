@@ -31,6 +31,65 @@ const page = async ({ params }: TrekProps) => {
             </div>
           </div>
         </div>
+        <div className="flex flex-col mt-4">
+          <h1 className="text-2xl font-bold text-ocean-green-500">
+            Exploring the Hidden Trails of Landour
+          </h1>
+          <div className="md:max-w-4xl flex flex-col spy mt-4 w-full text-left">
+            <p className="font-medium text-gray-500 mt-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+              est suscipit debitis explicabo quibusdam libero consectetur, sed
+              necessitatibus culpa pariatur, sit dicta. Iure assumenda excepturi
+              cupiditate nam. Nam aut facilis magni accusantium dolore ipsam
+              recusandae eius! Iure, vitae? Ipsa officia recusandae alias non,
+              magnam porro tempore? Non esse, veritatis quidem odio nihil dicta
+              voluptas quasi ratione fugit ducimus, laboriosam vel perferendis
+              commodi, incidunt sequi quo deserunt. Harum nostrum asperiores
+              minus autem fuga totam officia veritatis? Quis, laborum facere!
+              Ullam error facere nam accusantium, ipsa animi quae numquam hic
+              nesciunt magnam! Quisquam, quidem. Quisquam, quidem. Quisquam,
+            </p>
+            <p className="font-medium text-gray-500 mt-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+              est suscipit debitis explicabo quibusdam libero consectetur, sed
+              necessitatibus culpa pariatur, sit dicta. Iure assumenda excepturi
+              cupiditate nam. Nam aut facilis magni accusantium dolore ipsam
+              recusandae eius! Iure, vitae? Ipsa officia recusandae alias non,
+              magnam porro tempore? Non esse, veritatis quidem odio nihil dicta
+              voluptas quasi ratione fugit ducimus, laboriosam vel perferendis
+              commodi, incidunt sequi quo deserunt. Harum nostrum asperiores
+              minus autem fuga totam officia veritatis? Quis, laborum facere!
+              Ullam error facere nam accusantium, ipsa animi quae numquam hic
+              nesciunt magnam! Quisquam, quidem. Quisquam, quidem. Quisquam,
+            </p>
+            <p className="font-medium text-gray-500 mt-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+              est suscipit debitis explicabo quibusdam libero consectetur, sed
+              necessitatibus culpa pariatur, sit dicta. Iure assumenda excepturi
+              cupiditate nam. Nam aut facilis magni accusantium dolore ipsam
+              recusandae eius! Iure, vitae? Ipsa officia recusandae alias non,
+              magnam porro tempore? Non esse, veritatis quidem odio nihil dicta
+              voluptas quasi ratione fugit ducimus, laboriosam vel perferendis
+              commodi, incidunt sequi quo deserunt. Harum nostrum asperiores
+              minus autem fuga totam officia veritatis? Quis, laborum facere!
+              Ullam error facere nam accusantium, ipsa animi quae numquam hic
+              nesciunt magnam! Quisquam, quidem. Quisquam, quidem. Quisquam,
+            </p>
+            <p className="font-medium text-gray-500 mt-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+              est suscipit debitis explicabo quibusdam libero consectetur, sed
+              necessitatibus culpa pariatur, sit dicta. Iure assumenda excepturi
+              cupiditate nam. Nam aut facilis magni accusantium dolore ipsam
+              recusandae eius! Iure, vitae? Ipsa officia recusandae alias non,
+              magnam porro tempore? Non esse, veritatis quidem odio nihil dicta
+              voluptas quasi ratione fugit ducimus, laboriosam vel perferendis
+              commodi, incidunt sequi quo deserunt. Harum nostrum asperiores
+              minus autem fuga totam officia veritatis? Quis, laborum facere!
+              Ullam error facere nam accusantium, ipsa animi quae numquam hic
+              nesciunt magnam! Quisquam, quidem. Quisquam, quidem. Quisquam,
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
