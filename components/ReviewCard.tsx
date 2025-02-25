@@ -1,20 +1,48 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import userImage from "@/public/avatar.png";
 import { motion } from "motion/react";
 import { Star } from "lucide-react";
+import { getReview1 } from "@/sanity/lib/querys/getReview1";
+import { getReview2 } from "@/sanity/lib/querys/getReview2";
 
-const reviews = [
-  "The best decision I’ve ever made was choosing Landour Explorer for my trekking adventure! From the moment I signed up, the team was incredibly professional, friendly, and knowledgeable",
-  "The best decision I’ve ever made was choosing Landour Explorer for my trekking adventure! From the moment I signed up, the team was incredibly professional, friendly, and knowledgeable",
-  "The best decision I’ve ever made was choosing Landour Explorer for my trekking adventure! From the moment I signed up, the team was incredibly professional, friendly, and knowledgeable",
-  "The best decision I’ve ever made was choosing Landour Explorer for my trekking adventure! From the moment I signed up, the team was incredibly professional, friendly, and knowledgeable",
-  "The best decision I’ve ever made was choosing Landour Explorer for my trekking adventure! From the moment I signed up, the team was incredibly professional, friendly, and knowledgeable",
-  "The best decision I’ve ever made was choosing Landour Explorer for my trekking adventure! From the moment I signed up, the team was incredibly professional, friendly, and knowledgeable",
-];
+interface ReviewInterface {
+  name: string;
+  date: string;
+  comment: string;
+  userImage: string;
+}
 
 const ReviewCard = () => {
+  const [reviews1, setReviews1] = useState<ReviewInterface[] | null>(null);
+  const [reviews2, setReviews2] = useState<ReviewInterface[] | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getReview1();
+        setReviews1(data);
+      } catch (error) {
+        console.error("Failed to fetch navbar data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getReview2();
+        setReviews2(data);
+      } catch (error) {
+        console.error("Failed to fetch navbar data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  if (reviews1 === null || reviews2 === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="mt-6 flex overflow-hidden">
       <div className="relative flex flex-col space-y-6">
@@ -24,7 +52,7 @@ const ReviewCard = () => {
           animate={{ x: ["-100%", "100%"] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
-          {reviews.map((review, index) => (
+          {reviews2.map((review, index) => (
             <div
               key={index}
               className="w-[400px] h-[250px] rounded-lg bg-[#f0f1f5] min-w-[250px] px-2 py-3"
@@ -33,15 +61,17 @@ const ReviewCard = () => {
                 <div className="flex items-center justify-normal gap-3">
                   <div className="w-[50px] h-[50px] rounded-full">
                     <Image
-                      src={userImage}
+                      src={review.userImage}
                       alt="user_review_Image"
+                      width={150}
+                      height={150}
                       className="w-full h-full object-center rounded-full"
                     />
                   </div>
                   <div className="flex flex-col">
-                    <p>Aman Lal</p>
+                    <p>{review.name}</p>
                     <p className="text-[12px] to-muted-foreground">
-                      Jan 24, 2025,Mon
+                      {new Date(review.date).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
@@ -54,7 +84,7 @@ const ReviewCard = () => {
                 <Star size={22} className="text-[#f4cd00] mt-2" />
               </div>
               <p className="text-sm text-muted-foreground px-3 py-3">
-                {review}
+                {review.comment}
               </p>
             </div>
           ))}
@@ -65,7 +95,7 @@ const ReviewCard = () => {
           animate={{ x: ["100%", "-100%"] }}
           transition={{ repeat: Infinity, duration: 22, ease: "linear" }}
         >
-          {reviews.map((review, index) => (
+          {reviews1.map((review, index) => (
             <div
               key={index}
               className="w-[400px] h-[250px] rounded-lg bg-[#f0f1f5] min-w-[250px] px-2 py-3"
@@ -74,15 +104,17 @@ const ReviewCard = () => {
                 <div className="flex items-center justify-normal gap-3">
                   <div className="w-[50px] h-[50px] rounded-full">
                     <Image
-                      src={userImage}
+                      src={review.userImage}
                       alt="user_review_Image"
+                      width={150}
+                      height={150}
                       className="w-full h-full object-center rounded-full"
                     />
                   </div>
                   <div className="flex flex-col">
-                    <p>Aman Lal</p>
+                    <p>{review.name}</p>
                     <p className="text-[12px] to-muted-foreground">
-                      Jan 24, 2025,Mon
+                      {new Date(review.date).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
@@ -95,7 +127,7 @@ const ReviewCard = () => {
                 <Star size={22} className="text-[#f4cd00] mt-2" />
               </div>
               <p className="text-sm text-muted-foreground px-3 py-3">
-                {review}
+                {review.comment}
               </p>
             </div>
           ))}

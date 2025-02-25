@@ -7,8 +7,8 @@ interface ReviewInterface {
   userImage: string;
 }
 
-export const getReview1 = async (): Promise<ReviewInterface[]> => {
-  const query = `*[_type == "review"][0...5]{
+export const getReview2 = async (): Promise<ReviewInterface[]> => {
+  const query = `*[_type == "review"][5...9]{
    name,
    date,
    "userImage": image.asset->url,
