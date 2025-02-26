@@ -1,6 +1,6 @@
 "use client";
 import "swiper/css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import img1 from "@/public/img_1.jpg";
@@ -12,56 +12,57 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { getAllLocation } from "@/sanity/lib/querys/getAllLocation";
+import { getHeroTreks } from "@/sanity/lib/querys/getHeroTreks";
 
+interface TrekCardProps {
+  trekName: string;
+}
+export interface HeroInterface {
+  _id: string;
+  slug: string;
+  trekName: string;
+  backgroundImageUrl: string;
+  location: string;
+  rating: number;
+}
 const TrekCard = () => {
+  const [location, setLocation] = useState<TrekCardProps[]>([]);
+  const [treks, setTreks] = useState<HeroInterface[]>([]);
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      const data = await getAllLocation();
+      setLocation(data);
+    };
+    fetchLocation();
+  }, []);
+
+  useEffect(() => {
+    const fetchTreks = async () => {
+      const data = await getHeroTreks();
+      setTreks(data);
+    };
+    fetchTreks();
+  }, []);
   return (
     <div className="flex flex-col">
       {/* Top Nav */}
-      <div className="mt-6 w-full h-[60px]">
+      <div className="mt-6 w-full flex space-x-1 h-[60px]">
+        <div className="px-4 py-2 text-nowrap w-24 h-[40px] bg-ocean-green-500 text-white rounded-3xl">
+          View All
+        </div>
         <Carousel className="w-full h-full">
-          <CarouselContent className="w-[100px] mx-3 space-x-4 h-[40px]">
-            <CarouselItem className="px-4 py-2 flex items-center justify-center  bg-ocean-green-500 text-white rounded-3xl">
-              View All
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
-            <CarouselItem className="px-4 py-2 flex items-center justify-center font-semibold rounded-3xl">
-              Landour
-            </CarouselItem>
+          <CarouselContent className="w-[220px] text-nowrap mx-3 gap-5 h-[40px]">
+            {location.map((item, index) => (
+              <CarouselItem
+                className="px-4 bg-ocean-green-500 text-sm  text-center text-white py-2 font-semibold rounded-3xl"
+                key={index}
+                onClick={() => window.location.replace(`/treks`)}
+              >
+                {item.trekName}
+              </CarouselItem>
+            ))}
           </CarouselContent>
         </Carousel>
       </div>
@@ -89,111 +90,31 @@ const TrekCard = () => {
           speed={700}
           className="w-full h-[440px] py-[20px] flex items-center"
         >
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img2}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img1}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img2}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img1}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img2}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img1}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4">
-            <div className="w-full h-[90%] bg-center">
-              <Image
-                src={img2}
-                alt={`trek image`}
-                className="w-full rounded-3xl h-full"
-              />
-            </div>
-            <div className="flex flex-col mt-2 px-1">
-              <p className="text-lg font-sans font-semibold ">
-                Landour Backhouse, Landour
-              </p>
-              <p className="text-muted-foreground font-medium">Landour</p>
-            </div>
-          </SwiperSlide>
+          {treks.map((item) => (
+            <SwiperSlide
+              key={item._id}
+              className="cursor-pointer flex flex-col w-[280px] h-full rounded-md px-2 py-4 mb-4"
+              onClick={() => window.location.replace(`/treks/${item.slug}`)}
+            >
+              <div className="w-full h-[90%] bg-center">
+                <Image
+                  src={item.backgroundImageUrl}
+                  width={600}
+                  height={600}
+                  alt={`${item.trekName} image`}
+                  className="w-full rounded-3xl h-full"
+                />
+              </div>
+              <div className="flex flex-col mt-2 px-1">
+                <p className="text-lg font-sans font-semibold ">
+                  {item.trekName}, Landour
+                </p>
+                <p className="text-muted-foreground font-medium">
+                  {item.location}
+                </p>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
       <div className="mt-8 flex items-center justify-center">
