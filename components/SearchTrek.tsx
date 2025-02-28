@@ -16,22 +16,27 @@ export interface HeroInterface {
   rating: number;
 }
 
-const SearchTrek = (quary: any) => {
-  const [trekCards, setTreks] = useState<HeroInterface[]>([]);
+interface SearchTrekProps {
+  query: string;
+}
+
+const SearchTrek: React.FC<SearchTrekProps> = ({ query }) => {
+  const [trek, setTreks] = useState<HeroInterface>();
 
   useEffect(() => {
     const getdata = async () => {
-      const data = await getSearchTrek(quary);
+      const data = await getSearchTrek(query);
       setTreks(data);
     };
     getdata();
-  }, []);
-  if (!trekCards) {
+  }, [query]);
+
+  if (!trek) {
     return (
       <>
         <div className="px-8 py-8">
           <h1 className="text-lg font-semibold">
-            Search: <span className="text-teal-700 font-medium">{quary}</span>
+            Search: <span className="text-teal-700 font-medium">{query}</span>
           </h1>
         </div>
         <div className="flex items-center justify-center h-screen">
@@ -42,7 +47,7 @@ const SearchTrek = (quary: any) => {
             <div className="w-[350px]">
               <Image
                 src={travel}
-                alt="Treak_Not_Found"
+                alt="Trek_Not_Found"
                 className="w-full h-full"
               />
             </div>
@@ -56,14 +61,12 @@ const SearchTrek = (quary: any) => {
       </>
     );
   }
+
   return (
-    <div className="mt-8">
-      <div className="grid lg:grid-cols-3 lg:gap-12 gap-2 md:grid-cols-2 grid-cols-1 px-0 my-16">
-        {trekCards.map((trek, index) => (
-          <div
-            className="lg:w-[320px] md:w-[360px] w-full h-[550px]"
-            key={index}
-          >
+    <div className="md:px-20 px-4 py-8">
+      <div className="mt-8">
+        <div className="grid lg:grid-cols-3 lg:gap-12 gap-2 md:grid-cols-2 grid-cols-1 px-0 my-16">
+          <div className="lg:w-[320px] md:w-[360px] w-full h-[550px]">
             <div className="w-full h-[50%] bg-center">
               <Image
                 src={trek.backgroundImageUrl}
@@ -81,34 +84,34 @@ const SearchTrek = (quary: any) => {
                   {trek.rating}
                 </p>
               </div>
-              <div className="flex flex-col mt-4 px-2 space-y-2">
-                <p className="flex items-center font-semibold justify-normal gap-4">
-                  <MapPin size={22} className="text-ocean-green-500" />
-                  {trek.location}
-                </p>
-              </div>
-              <div className="w-full flex items-center justify-center gap-3 mt-4">
-                <a href="tel:8630024459">
-                  <Button className="py-6 bg-transparent border-[4px] text-ocean-green-500 rounded-md border-solid border-ocean-green-600 hover:text-white hover:border-ocean-green-500 hover:bg-ocean-green-500">
-                    <Phone />
-                  </Button>
-                </a>
-                <Link
-                  href={
-                    trek.slug === null
-                      ? ""
-                      : `/treks/${trek.trekName.split(" ").join("-")}`
-                  }
-                  className="w-full"
-                >
-                  <Button className="w-full py-6 border-[4px] border-solid border-ocean-green-500 bg-ocean-green-500 hover:bg-ocean-green-600 hover:border-ocean-green-600">
-                    View Details
-                  </Button>
-                </Link>
-              </div>
+            </div>
+            <div className="flex flex-col mt-4 px-2 space-y-2">
+              <p className="flex items-center font-semibold justify-normal gap-4">
+                <MapPin size={22} className="text-ocean-green-500" />
+                {trek.location}
+              </p>
+            </div>
+            <div className="w-full flex items-center justify-center gap-3 mt-4">
+              <a href="tel:">
+                <Button className="py-6 bg-transparent border-[4px] text-ocean-green-500 rounded-md border-solid border-ocean-green-600 hover:text-white hover:border-ocean-green-500 hover:bg-ocean-green-500">
+                  <Phone />
+                </Button>
+              </a>
+              <Link
+                href={
+                  trek.slug === null
+                    ? ""
+                    : `/treks/${trek.trekName.split(" ").join("-")}`
+                }
+                className="w-full"
+              >
+                <Button className="w-full py-6 border-[4px] border-solid border-ocean-green-500 bg-ocean-green-500 hover:bg-ocean-green-600 hover:border-ocean-green-600">
+                  View Details
+                </Button>
+              </Link>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

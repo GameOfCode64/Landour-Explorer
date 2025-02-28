@@ -8,7 +8,7 @@ export interface HeroInterface {
   location: string;
   rating: number;
 }
-export const getSearchTrek = async (slug: string): Promise<HeroInterface[]> => {
+export const getSearchTrek = async (slug: string): Promise<HeroInterface> => {
   const Slug = slug.toLocaleLowerCase();
   const query = `
   *[_type == "trekCard"&& slug.current== "${Slug}" ][0]{
