@@ -56,7 +56,7 @@ const TrekCard = () => {
           <CarouselContent className="w-[220px] text-nowrap mx-3 gap-5 h-[40px]">
             {location.map((item, index) => (
               <CarouselItem
-                className="px-4 bg-ocean-green-500 text-sm  text-center text-white py-2 font-semibold rounded-3xl"
+                className="px-4 bg-white text-sm  text-center text-ocean-green-500 py-2 font-semibold rounded-3xl"
                 key={index}
                 onClick={() => window.location.replace(`/treks`)}
               >
