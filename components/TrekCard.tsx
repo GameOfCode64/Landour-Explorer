@@ -1,19 +1,17 @@
 "use client";
 import "swiper/css";
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import img1 from "@/public/img_1.jpg";
-import img2 from "@/public/img_2.jpeg";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useEffect, useState } from "react";
+import { getHeroTreks } from "@/sanity/lib/querys/getHeroTreks";
+import { getAllLocation } from "@/sanity/lib/querys/getAllLocation";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { getAllLocation } from "@/sanity/lib/querys/getAllLocation";
-import { getHeroTreks } from "@/sanity/lib/querys/getHeroTreks";
 
 interface TrekCardProps {
   trekName: string;
@@ -119,7 +117,7 @@ const TrekCard = () => {
       </div>
       <div className="mt-8 flex items-center justify-center">
         <motion.button
-          className=" px-8 cursor-pointer  flex bg-ocean-green-500 hover:bg-ocean-green-600 py-3 items-center justify-center text-white rounded-3xl mg:mt-8 mt-4"
+          className="px-8 cursor-pointer  flex bg-ocean-green-500 hover:bg-ocean-green-600 py-3 items-center justify-center text-white rounded-3xl mg:mt-8 mt-4"
           animate={{ y: [0, -10, 0] }}
           transition={{
             duration: 2,
