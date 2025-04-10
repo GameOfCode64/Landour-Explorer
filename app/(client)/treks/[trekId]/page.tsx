@@ -7,7 +7,8 @@ interface TrekProps {
   params: Promise<{ trekId: string }>;
 }
 const page = async ({ params }: TrekProps) => {
-  const id = await (await params).trekId;
+  const { trekId } = await params;
+
   return (
     <div className="md:px-20 px-4">
       <div className="w-full flex flex-col">
@@ -35,7 +36,7 @@ const page = async ({ params }: TrekProps) => {
           <h1 className="text-2xl font-bold text-ocean-green-500">
             Exploring the Hidden Trails of Landour
           </h1>
-          <div className="md:max-w-4xl flex flex-col spy mt-4 w-full text-left">
+          <div className="md:max-w-4xl flex flex-col mt-4 w-full text-left">
             <p className="font-medium text-gray-500 mt-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
               est suscipit debitis explicabo quibusdam libero consectetur, sed

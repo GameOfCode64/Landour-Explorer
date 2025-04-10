@@ -1,19 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import blog3 from "@/public/blog3.jpg";
-import FollowBtn from "@/components/FollowBtn";
-import getfullblogs from "@/sanity/lib/querys/getFullblog";
-import { notFound } from "next/navigation";
 import avatar from "@/public/avatar.png";
+import { notFound } from "next/navigation";
 import { PortableText } from "next-sanity";
+import FollowBtn from "@/components/FollowBtn";
 import { urlForImage } from "@/sanity/lib/image";
+import getfullblogs from "@/sanity/lib/querys/getFullblog";
 
 interface BlogParams {
-  params: { blogId: string };
+  params: Promise<{ blogId: string }>;
 }
 
 const TrekPage = async ({ params }: BlogParams) => {
-  const { blogId } = params;
+  const { blogId } = await params;
   const blogData = await getfullblogs(blogId);
 
   if (!blogData) return notFound();
@@ -21,7 +21,7 @@ const TrekPage = async ({ params }: BlogParams) => {
   const BlogStyle = `
     prose prose-teal mt-8 text-justify
     max-w-full lg:max-w-[90%] md:max-w-[90%]
-    prose-headings:text-left prose-headings:text-2xl prose-headings:text-teal-700
+    prose-headings:text-left prose-headings:text-2xl prose-headings:text-ocean-green-700
     prose-p:text-left prose-p:mb-5
     prose-img:my-5
     prose-a:text-teal-700
@@ -58,7 +58,7 @@ const TrekPage = async ({ params }: BlogParams) => {
   return (
     <div className="md:px-20 px-4">
       <div className="flex w-full flex-col">
-        {/* Blog Top Image */}
+        {/* Blog Cover */}
         <div className="w-full h-[400px] bg-ocean-green-500/15 rounded-3xl">
           <Image
             src={
@@ -66,12 +66,12 @@ const TrekPage = async ({ params }: BlogParams) => {
             }
             width={1200}
             height={500}
-            alt={`Cover image for blog titled "${blogData.title}"`}
+            alt={`Cover image for blog "${blogData.title}"`}
             className="w-full h-full rounded-3xl object-cover"
           />
         </div>
 
-        {/* Author Info + Follow */}
+        {/* Author Info & Follow */}
         <div className="flex items-center justify-between my-8">
           <div className="flex items-center">
             <Image
@@ -82,7 +82,7 @@ const TrekPage = async ({ params }: BlogParams) => {
               }
               width={56}
               height={56}
-              alt={`Author image for ${blogData.author}`}
+              alt={`Author: ${blogData.author}`}
               className="w-14 h-14 rounded-full object-cover"
             />
             <div className="ml-4">

@@ -1,22 +1,40 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, Map, MapPin, Phone, Star } from "lucide-react";
-import { trekCards } from "@/data/trekdata";
+import { MapPin, Phone, Star } from "lucide-react";
 import Link from "next/link";
+import { getHeroTreks } from "@/sanity/lib/querys/getHeroTreks";
 
+export interface HeroInterface {
+  _id: string;
+  slug: string;
+  trekName: string;
+  backgroundImageUrl: string;
+  location: string;
+  rating: number;
+}
 const TrekPageCard = () => {
+  const [treks, setTreks] = useState<HeroInterface[]>([]);
+
+  useEffect(() => {
+    const fetchTreks = async () => {
+      const data = await getHeroTreks();
+      setTreks(data);
+    };
+    fetchTreks();
+  }, []);
   return (
     <div className="mt-8">
       <div className="grid lg:grid-cols-3 lg:gap-12 gap-2 md:grid-cols-2 grid-cols-1 px-0 my-16">
-        {trekCards.map((trek, index) => (
+        {treks.map((trek, index) => (
           <div
             className="lg:w-[320px] md:w-[360px] w-full h-[550px]"
             key={index}
           >
             <div className="w-full h-[50%] bg-center">
               <Image
-                src={trek.image}
+                src={trek.backgroundImageUrl}
                 alt={`${trek.trekName} image`}
                 className="w-full rounded-3xl h-full"
                 width={350}
