@@ -23,7 +23,6 @@ const Search = () => {
       onClose();
     }
   };
-
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       handleSearch();

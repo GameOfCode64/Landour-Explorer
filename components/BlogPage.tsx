@@ -1,12 +1,16 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import bg1 from "@/public/blog1.jpg";
 import bg2 from "@/public/blog2.jpg";
-import bg3 from "@/public/blog3.jpg";
-import { motion } from "motion/react";
+import MotionButton from "@/components/MotionButton";
+import getLatestBlog from "@/sanity/lib/querys/getlatestBlog";
+import { getTop3Blogs } from "@/sanity/lib/querys/getTop3Blogs";
+import Link from "next/link";
 
-const BlogPage = () => {
+const BlogPage = async () => {
+  const latest = await getLatestBlog();
+  const sideBlogs = await getTop3Blogs();
+
   return (
     <div className="flex flex-col mt-8 md:mt-20 md:px-20 px-4 mb-20">
       <h1 className="text-4xl font-bold">Latest Blogs</h1>
@@ -14,124 +18,74 @@ const BlogPage = () => {
         <div className="flex flex-col">
           <div className="md:w-[600px] w-full h-[400px] rounded-3xl">
             <Image
-              src={bg1}
+              src={latest.backgroundImageUrl || bg1}
+              width={1000}
+              height={1000}
               alt="blog_img"
               className="w-full h-full rounded-3xl object-center object-cover"
             />
           </div>
           <div className="mt-4 space-y-2">
-            <p className="font-bold text-ocean-green-500">Traveling</p>
-            <h1 className="text-2xl font-bold md:text-wrap">
-              Try are our latest blogs & Stories related to traveling
-            </h1>
-            <p className="text-muted-foreground">Jan 24, 2025, Mon</p>
+            <p className="font-bold text-ocean-green-500">{latest.type}</p>
+            <Link
+              href={`/blogs/${latest.slug.current}`}
+              className="hover:underline"
+            >
+              <h1 className="text-2xl font-bold md:text-wrap">
+                {latest.title}
+              </h1>
+            </Link>
+            <p className="text-muted-foreground">
+              {new Date(latest?.publishedAt).toDateString()}
+            </p>
             <p className="mt-2 text-gray-500 md:pr-14">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              sit amet neque nec mi efficitur tincidunt. Nullam ultricies
-              tincidunt mi, ac ultricies sapien.
+              <p>{latest.excerpt}</p>
             </p>
           </div>
         </div>
         <div className="flex flex-col md:my-0 my-8 space-y-4 ">
-          <div className="flex gap-5">
-            <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
-              <Image
-                src={bg3}
-                alt="blog_img"
-                className="w-full h-full rounded-3xl object-center object-cover"
-              />
-            </div>
-            <div className="flex flex-col w-[220px]">
-              <p className="font-bold text-ocean-green-500">Traveling</p>
-              <h1 className="md:max-w-[370px] font-bold text-sm md:text-lg text-wrap">
-                Try are our latest blogs & Stories related to traveling. Try are
-                our latest blogs.
-              </h1>
-
-              <div className="md:mt-6 mt-2 text-sm">
-                <p className="font-bold">
-                  By :-{" "}
-                  <span className="text-ocean-green-500 font-semibold">
-                    {" "}
-                    John Doe
-                  </span>
+          {sideBlogs.map((data, index) => (
+            <div className="flex gap-5" key={index}>
+              <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
+                <Image
+                  src={data.backgroundImageUrl || bg2}
+                  width={1000}
+                  height={1000}
+                  alt="blog_img"
+                  className="w-full h-full rounded-3xl object-center object-cover"
+                />
+              </div>
+              <div className="flex flex-col w-[220px]">
+                <p className="font-bold text-ocean-green-500">
+                  {data.type || "Traveling"}
                 </p>
-                <p className="text-muted-foreground">Jan 24, 2025, Mon</p>
+                <Link
+                  href={`/blogs/${latest.slug.current}`}
+                  className="hover:underline"
+                >
+                  <h1 className="md:max-w-[370px] font-bold text-sm md:text-lg text-wrap">
+                    {data.title}
+                  </h1>
+                </Link>
+                <div className="md:mt-6 mt-2 text-sm">
+                  <p className="font-bold">
+                    By :-{" "}
+                    <span className="text-ocean-green-500 font-semibold">
+                      {" "}
+                      {data.author || "John Doe"}
+                    </span>
+                  </p>
+                  <p className="text-muted-foreground">
+                    {" "}
+                    {new Date(latest?.publishedAt).toDateString()}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex gap-5">
-            <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
-              <Image
-                src={bg2}
-                alt="blog_img"
-                className="w-full h-full rounded-3xl object-center object-cover"
-              />
-            </div>
-            <div className="flex flex-col w-[220px]">
-              <p className="font-bold text-ocean-green-500">Traveling</p>
-              <h1 className="md:max-w-[370px] font-bold text-sm md:text-lg text-wrap">
-                Try are our latest blogs & Stories related to traveling. Try are
-                our latest blogs.
-              </h1>
-
-              <div className="md:mt-6 mt-2 text-sm">
-                <p className="font-bold">
-                  By :-{" "}
-                  <span className="text-ocean-green-500 font-semibold">
-                    {" "}
-                    John Doe
-                  </span>
-                </p>
-                <p className="text-muted-foreground">Jan 24, 2025, Mon</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-5">
-            <div className="md:w-[200px] w-[150px] h-[150px] md:h-[200px] rounded-3xl">
-              <Image
-                src={bg1}
-                alt="blog_img"
-                className="w-full h-full rounded-3xl object-center object-cover"
-              />
-            </div>
-            <div className="flex flex-col w-[220px]">
-              <p className="font-bold text-ocean-green-500">Traveling</p>
-              <h1 className="md:max-w-[470px] font-bold text-sm md:text-lg ">
-                Try are our latest blogs & Stories related to traveling. Try are
-                our latest blogs.
-              </h1>
-
-              <div className="md:mt-6 mt-2 text-sm">
-                <p className="font-bold">
-                  By :-{" "}
-                  <span className="text-ocean-green-500 font-semibold">
-                    {" "}
-                    John Doe
-                  </span>
-                </p>
-                <p className="text-muted-foreground">Jan 24, 2025, Mon</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-      <div className="my-8 flex items-center justify-center">
-        <motion.button
-          className="px-8 cursor-pointer  flex bg-ocean-green-500 hover:bg-ocean-green-600 py-3 items-center justify-center text-white rounded-3xl mg:mt-8 mt-4"
-          animate={{ y: [0, -10, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          onClick={() => {
-            window.location.href = "/blogs";
-          }}
-        >
-          Explore All Blogs
-        </motion.button>
-      </div>
+      <MotionButton />
     </div>
   );
 };

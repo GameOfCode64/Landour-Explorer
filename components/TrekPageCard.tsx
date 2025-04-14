@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Star } from "lucide-react";
 import Link from "next/link";
-import { getHeroTreks } from "@/sanity/lib/querys/getHeroTreks";
+import { getAllTreks } from "@/sanity/lib/querys/getAllTrek";
 
 export interface HeroInterface {
   _id: string;
@@ -19,11 +19,12 @@ const TrekPageCard = () => {
 
   useEffect(() => {
     const fetchTreks = async () => {
-      const data = await getHeroTreks();
+      const data = await getAllTreks();
       setTreks(data);
     };
     fetchTreks();
   }, []);
+
   return (
     <div className="mt-8">
       <div className="grid lg:grid-cols-3 lg:gap-12 gap-2 md:grid-cols-2 grid-cols-1 px-0 my-16">
@@ -61,14 +62,7 @@ const TrekPageCard = () => {
                     <Phone />
                   </Button>
                 </a>
-                <Link
-                  href={
-                    trek.slug === null
-                      ? ""
-                      : `/treks/${trek.trekName.split(" ").join("-")}`
-                  }
-                  className="w-full"
-                >
+                <Link href={`/treks/${trek.slug}`} className="w-full">
                   <Button className="w-full py-6 border-[4px] border-solid border-ocean-green-500 bg-ocean-green-500 hover:bg-ocean-green-600 hover:border-ocean-green-600">
                     View Details
                   </Button>

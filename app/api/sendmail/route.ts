@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  let mailOptions = {
+  const mailOptions = {
     from: email,
     to: process.env.GMAIL_USER,
     subject: `Trek Booking Form Submission from ${fullName}`,

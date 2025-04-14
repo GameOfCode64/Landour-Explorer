@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import userImage from "@/public/avatar.png";
 import { motion } from "motion/react";
 import { Star } from "lucide-react";
 import { getReview1 } from "@/sanity/lib/querys/getReview1";

@@ -43,8 +43,8 @@ const ContactPage = () => {
             We ❤️ love to hear from you!
           </h1>
           <p className="mt-4 text-lg text-center">
-            Fill out the form below to get in touch, and let's start planning
-            your next adventure.
+            Fill out the form below to get in touch, and let&apos;s start
+            planning your next adventure.
           </p>
           <div className="mt-8">
             <Image src={contact} alt="contact-us" width={300} height={300} />
