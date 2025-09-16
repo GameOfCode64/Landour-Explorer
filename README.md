@@ -1,0 +1,1 @@
+A Trekking Website that helps clients to navigate through all the treks/hikes with a user friendly interface allowing customers to search and look for their pesonalized recommended trek. This Website is made by using Technologies like Html, Css, Javascript, Typescript as front-end whereas the Backend Technology used is Sanity.io for CMS.
